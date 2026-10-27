@@ -25,10 +25,10 @@ public:
 };
 
 // Ошибка - нарушены правила игры
-class GameError : public std::runtime_error {
+class GameRuleError : public std::runtime_error {
 public:
-    GameError();
-    explicit GameError(const std::string& details);
+    GameRuleError();
+    explicit GameRuleError(const std::string& details);
 };
 
 class GameStateError : public std::runtime_error {

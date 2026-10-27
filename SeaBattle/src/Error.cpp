@@ -26,10 +26,10 @@ FileFormatError::FileFormatError(const std::string& details)
 //==============================================================
 
 
-GameError::GameError()
+GameRuleError::GameRuleError()
     : std::runtime_error("Ошибка, нарушены правила игры!") {}
 
-GameError::GameError(const std::string& details)
+GameRuleError::GameRuleError(const std::string& details)
     : std::runtime_error("Ошибка, нарушены правила игры: " + details) {}
 
 //==============================================================

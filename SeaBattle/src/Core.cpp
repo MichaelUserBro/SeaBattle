@@ -7,6 +7,7 @@
 // =================== Класс Rules ===================
 
 int Rules::getFieldSize() const { return fieldSize_; }
+bool Rules::getAllowTouching() const { return allowTouching_; }
 
 // =================== Класс Coordinate ===================
 
@@ -72,6 +73,21 @@ Coordinate Coordinate::parse(const std::string& text, int fieldSize) {
 
 	return Coordinate(row, col);
 }
+bool Coordinate::inBounds(int size) const {
+	return row >= 0 && row < size && column >= 0 && column < size;
+}
+std::vector<Coordinate> Coordinate::getNeighbors(int size) const {
+	std::vector<Coordinate> result;
+	for (int dr = -1; dr <= 1; ++dr) {
+		for (int dc = -1; dc <= 1; ++dc) {
+			if (dr == 0 && dc == 0) continue;      
+			Coordinate n{ row + dr, column + dc };
+			if (n.inBounds(size))
+				result.push_back(n);
+		}
+	}
+	return result;
+}
 
 bool Coordinate::operator==(const Coordinate& other) const {
 	return row == other.row && column == other.column;
@@ -80,10 +96,12 @@ bool Coordinate::operator==(const Coordinate& other) const {
 // =================== Класс Ship ===================
 
 Ship::Ship() : coords_(), hitStatus_() {};
-Ship::Ship(const std::vector<Coordinate>& coords) : coords_(coords), hitStatus_(coords.size(), false) {};
+Ship::Ship(const std::vector<Coordinate>& coords) : coords_(coords), hitStatus_(coords.size(), false) {
+	std::sort(coords_.begin(), coords_.end());
+};
 
 int Ship::getLength() { return coords_.size(); }
-std::vector<Coordinate> Ship::getCoords() { return coords_; }
+std::vector<Coordinate> Ship::getCoords() const { return coords_; }
 
 
 bool Ship::contains(const Coordinate& coord) const {
@@ -122,7 +140,7 @@ void Board::clear() {
 		for (int j = 0; j < fieldSize_; j++)
 			field_[i][j] = CellStatus::Empty;
 }
-CellStatus Board::cellStatusAt(Coordinate coord) { return field_[coord.getRow()][coord.getColumn()]; }
+CellStatus Board::cellStatusAt(Coordinate coord) const { return field_[coord.getRow()][coord.getColumn()]; }
 bool Board::allSunk() {
 	for (Ship ship : ships_)
 		if (!ship.isSunk()) return false;

@@ -1,4 +1,5 @@
 #pragma once
+#include <algorithm>
 #include <string>
 #include <vector>
 
@@ -11,8 +12,10 @@ const std::string ENG_ALF = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 class Rules {
 	private:
 		int fieldSize_;
+		bool allowTouching_;
 	public:
 		int getFieldSize() const;
+		bool getAllowTouching() const;
 };
 
 class Coordinate {
@@ -30,6 +33,8 @@ class Coordinate {
 
 		//Методы
 		static Coordinate parse(const std::string& text, int fieldSize);
+		bool inBounds(int size) const;
+		std::vector<Coordinate> getNeighbors(int size) const;
 
 		//Операторы
 
@@ -46,7 +51,7 @@ class Ship {
 		Ship(const std::vector<Coordinate>& coords);
 
 		int getLength();
-		std::vector<Coordinate> getCoords();
+		std::vector<Coordinate> getCoords() const;
 		bool contains(const Coordinate& coord) const;
 		bool isSunk();
 
@@ -68,7 +73,7 @@ class Board {
 
 		void placeShip(Ship ship);
 		void clear();
-		CellStatus cellStatusAt(Coordinate coord);
+		CellStatus cellStatusAt(Coordinate coord) const;
 		bool allSunk();
 
 };
