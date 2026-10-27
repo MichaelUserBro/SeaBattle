@@ -72,3 +72,8 @@ class Board {
 		bool allSunk();
 
 };
+
+struct Move
+{
+
+};

@@ -31,3 +31,9 @@ public:
     explicit GameError(const std::string& details);
 };
 
+class GameStateError : public std::runtime_error {
+public:
+    GameStateError();
+    explicit GameStateError(const std::string& details);
+};
+

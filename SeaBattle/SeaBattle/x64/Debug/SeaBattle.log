@@ -1,4 +1,5 @@
 ﻿  Core.cpp
-  Main.cpp
+C:\ProjectOrCode\C++\Курсач\SeaBattle\src\Core.cpp(85,44): warning C4267: return: преобразование из "size_t" в "int"; возможна потеря данных
+  Game.cpp
   Создание кода...
   SeaBattle.vcxproj -> C:\ProjectOrCode\C++\Курсач\SeaBattle\x64\Debug\SeaBattle.exe

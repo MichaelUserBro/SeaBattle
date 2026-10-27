@@ -3,22 +3,6 @@
   "WorkspaceRootPath": "C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1925B88A-B3A2-4674-AEA2-276A6B915378}|SeaBattle.vcxproj|C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\Core\\Core.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1925B88A-B3A2-4674-AEA2-276A6B915378}|SeaBattle.vcxproj|solutionrelative:Core\\Core.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1925B88A-B3A2-4674-AEA2-276A6B915378}|SeaBattle.vcxproj|C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\Core\\Core.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1925B88A-B3A2-4674-AEA2-276A6B915378}|SeaBattle.vcxproj|solutionrelative:Core\\Core.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1925B88A-B3A2-4674-AEA2-276A6B915378}|SeaBattle.vcxproj|C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\Core\\Error.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1925B88A-B3A2-4674-AEA2-276A6B915378}|SeaBattle.vcxproj|solutionrelative:Core\\Error.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1925B88A-B3A2-4674-AEA2-276A6B915378}|SeaBattle.vcxproj|C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\Core\\Error.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1925B88A-B3A2-4674-AEA2-276A6B915378}|SeaBattle.vcxproj|solutionrelative:Core\\Error.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1925B88A-B3A2-4674-AEA2-276A6B915378}|SeaBattle.vcxproj|C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1925B88A-B3A2-4674-AEA2-276A6B915378}|SeaBattle.vcxproj|solutionrelative:Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
@@ -30,71 +14,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "Main.cpp",
               "DocumentMoniker": "C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\Main.cpp",
               "RelativeDocumentMoniker": "Main.cpp",
               "ToolTip": "C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\Main.cpp",
               "RelativeToolTip": "Main.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-10-18T19:16:43.795Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Core.h",
-              "DocumentMoniker": "C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\Core\\Core.h",
-              "RelativeDocumentMoniker": "Core\\Core.h",
-              "ToolTip": "C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\Core\\Core.h",
-              "RelativeToolTip": "Core\\Core.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-10-14T15:28:00.443Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Core.cpp",
-              "DocumentMoniker": "C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\Core\\Core.cpp",
-              "RelativeDocumentMoniker": "Core\\Core.cpp",
-              "ToolTip": "C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\Core\\Core.cpp",
-              "RelativeToolTip": "Core\\Core.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-10-14T15:25:04.32Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Error.h",
-              "DocumentMoniker": "C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\Core\\Error.h",
-              "RelativeDocumentMoniker": "Core\\Error.h",
-              "ToolTip": "C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\Core\\Error.h",
-              "RelativeToolTip": "Core\\Error.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-10-14T15:27:44.789Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Error.cpp",
-              "DocumentMoniker": "C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\Core\\Error.cpp",
-              "RelativeDocumentMoniker": "Core\\Error.cpp",
-              "ToolTip": "C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\Core\\Error.cpp",
-              "RelativeToolTip": "Core\\Error.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAABAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-10-14T15:27:50.606Z",
               "EditorCaption": ""
             }
           ]

@@ -123,14 +123,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Core\Core.cpp" />
-    <ClCompile Include="Core\Error.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="src\Core.cpp" />
+    <ClCompile Include="src\Error.cpp" />
+    <ClCompile Include="src\Game.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Core\Core.h" />
-    <ClInclude Include="Core\Error.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="src\Core.h" />
+    <ClInclude Include="src\Error.h" />
+    <ClInclude Include="src\Game.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
