@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <optional>
 
 enum class Orientation {Horizontal, Vertical};
 enum class CellStatus {Empty, Ship, Miss, Hit, Killed}; // статус клетки
@@ -85,10 +86,13 @@ struct Move
 {
 
 }; 
-// Пустая хуйня (заглушка)
-struct ShotResult {
 
+struct ShotResult {
+	ShotStatus outcome;
+	std::optional<Ship> sunkShip;   // заполнено только при outcome == Sunk
 };
+
+
 
 Ship makeShip(Coordinate start, int length, Orientation orient);
 

@@ -1,9 +1,2 @@
-﻿  Core.cpp
-C:\ProjectOrCode\C++\Курсач\SeaBattle\src\Core.cpp(124,44): warning C4267: return: преобразование из "size_t" в "int"; возможна потеря данных
-  Game.cpp
-  Placement.cpp
-C:\ProjectOrCode\C++\Курсач\SeaBattle\src\Placement.cpp(83,35): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-  Strategy.cpp
-  Создание кода...
-C:\ProjectOrCode\C++\Курсач\SeaBattle\src\Game.cpp(31,1): warning C4715: Game::setup: значение возвращается не при всех путях выполнения
+﻿  Strategy.cpp
   SeaBattle.vcxproj -> C:\ProjectOrCode\C++\Курсач\SeaBattle\x64\Debug\SeaBattle.exe
