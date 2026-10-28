@@ -40,6 +40,7 @@ class Coordinate {
 		static Coordinate parse(const std::string& text, int fieldSize);
 		bool inBounds(int size) const;
 		std::vector<Coordinate> getNeighbors(int size) const;
+		std::string toString() const;
 
 		//Операторы
 

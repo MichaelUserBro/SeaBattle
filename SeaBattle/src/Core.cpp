@@ -107,6 +107,9 @@ std::vector<Coordinate> Coordinate::getNeighbors(int size) const {
 	}
 	return result;
 }
+std::string Coordinate::toString() const {
+	return std::string(1, static_cast<char>('A' + column)) + std::to_string(row + 1);
+}
 
 bool Coordinate::operator==(const Coordinate& other) const {
 	return row == other.row && column == other.column;
