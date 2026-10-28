@@ -130,6 +130,7 @@
     <ClCompile Include="src\Error.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Placement.cpp" />
+    <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Strategy.cpp" />
   </ItemGroup>
   <ItemGroup>

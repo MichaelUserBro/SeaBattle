@@ -1,2 +1,5 @@
-﻿  Strategy.cpp
+﻿  Game.cpp
+  Player.cpp
+  Создание кода...
+C:\ProjectOrCode\C++\Курсач\SeaBattle\src\Game.cpp(31,1): warning C4715: Game::setup: значение возвращается не при всех путях выполнения
   SeaBattle.vcxproj -> C:\ProjectOrCode\C++\Курсач\SeaBattle\x64\Debug\SeaBattle.exe
