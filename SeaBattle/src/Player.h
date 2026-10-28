@@ -25,7 +25,7 @@ class Player {
 
         virtual bool placeFleet(const Rules& rules) = 0;
         virtual std::optional<Coordinate> chooseShot() = 0;
-        virtual void onShotResult(Coordinate c, ShotResult result) = 0;
+        virtual void onShotResult(Coordinate c, const ShotResult& result) = 0;
 
         
 
@@ -40,7 +40,7 @@ class HumanPlayer : public Player {
 
         bool placeFleet(const Rules& rules) override;
         std::optional<Coordinate> chooseShot() override;
-        void onShotResult(Coordinate c, ShotResult result) override;
+        void onShotResult(Coordinate c, const ShotResult& result) override;
 
     
 };
@@ -56,7 +56,7 @@ class ComputerPlayer : public Player {
 
         bool placeFleet(const Rules& rules) override;
         std::optional<Coordinate> chooseShot() override;
-        void onShotResult(Coordinate c, ShotResult result) override;
+        void onShotResult(Coordinate c, const ShotResult& result) override;
 
     
 };

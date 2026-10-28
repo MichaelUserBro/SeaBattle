@@ -13,11 +13,13 @@ const std::string ENG_ALF = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 class Rules {
 	private:
 		int fieldSize_;			   // размер поля
-		bool allowTouching_;       // разрешено ли касание
+		bool allowTouching_;	   // разрешено ли касание
+		bool isShooterContinuesAfterHit_;
 		std::map<int, int> fleet_; // map<длинна корабля, количество кораблей>
 	public:
 		int getFieldSize() const;
 		bool getAllowTouching() const;
+		bool isContinue() const;
 		std::map<int, int> getFleet() const; 
 };
 
@@ -58,9 +60,20 @@ class Ship {
 		std::vector<Coordinate> getCoords() const;
 		bool contains(const Coordinate& coord) const;
 		bool isSunk();
+		void hit(const Coordinate& c);
 
 
+};
 
+// Пустая хуйня (заглушка)
+struct Move
+{
+
+};
+
+struct ShotResult {
+	ShotStatus outcome;
+	std::optional<Ship> sunkShip;
 };
 
 class Board {
@@ -77,20 +90,14 @@ class Board {
 
 		void placeShip(Ship ship);
 		void clear();
-		CellStatus cellStatusAt(Coordinate coord) const;
 		bool allSunk();
+		bool alreadyShot(const Coordinate& c) const;
+		CellStatus cellStatusAt(const Coordinate& coord) const;
+		ShotResult receiveShot(const Coordinate& c);
+		
 
 };
-// Пустая хуйня (заглушка)
-struct Move
-{
 
-}; 
-
-struct ShotResult {
-	ShotStatus outcome;
-	std::optional<Ship> sunkShip;   // заполнено только при outcome == Sunk
-};
 
 
 

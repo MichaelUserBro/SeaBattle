@@ -15,7 +15,7 @@ class GameObserver {
 		// Функция вызываемая 1 раз в начале игры
 		virtual void onGameStarted() {};
 		//
-		virtual void onShot(int playerIndex, Coordinate coord, ShotStatus result) {}
+		virtual void onShot(int playerIndex, Coordinate coord, const ShotResult& result) {}
 		// Функция вызываемая по окончании игры
 		virtual void onGameFinished(int winnerIndex) {}
 		// 
@@ -34,11 +34,24 @@ class Game {
 		std::vector<Move> history_;
 		int currentPlayer_;
 		GameState currentState_;
-		int winner = -1;
+		int winner_ = -1;
 
 	public:
 		Game(Rules rules, std::unique_ptr<Player> p0, std::unique_ptr<Player> p1);
 
+		int getWinner() const;
+		GameState getState() const;
+		int getCurrentPlayerIndex() const;
+		const std::vector<Move>& getHistory() const;
+		const Player& getPlayer(int i) const;
+		Player& getPlayer(int i);           
+		const Rules& getRules() const;
+		size_t getTurnCount() const;
+
 		void addObserver(GameObserver* obs);
-		bool setup(); // НЕДОДЕЛАНО
+		void restore(std::vector<Move> history, int currentIndex);
+		bool setup(); 
+		bool step();
+		bool isFinished() const;	
+			
 };

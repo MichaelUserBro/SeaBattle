@@ -24,7 +24,9 @@ Ship makeShip(Coordinate start, int length, Orientation orient) {
 
 int Rules::getFieldSize() const { return fieldSize_; }
 bool Rules::getAllowTouching() const { return allowTouching_; }
+bool Rules::isContinue() const { return isShooterContinuesAfterHit_; }
 std::map<int, int> Rules::getFleet() const { return fleet_; }
+
 
 // =================== Класс Coordinate ===================
 
@@ -137,6 +139,14 @@ bool Ship::isSunk() {
 	}
 	return true;
 }
+void Ship::hit(const Coordinate& c) {
+	for (size_t i = 0; i < coords_.size(); ++i) {
+		if (coords_[i] == c) {
+			hitStatus_[i] = true;
+			return;
+		}
+	}
+}
 
 // =================== Класс Board ===================
 
@@ -161,9 +171,40 @@ void Board::clear() {
 		for (int j = 0; j < fieldSize_; j++)
 			field_[i][j] = CellStatus::Empty;
 }
-CellStatus Board::cellStatusAt(Coordinate coord) const { return field_[coord.getRow()][coord.getColumn()]; }
 bool Board::allSunk() {
 	for (Ship ship : ships_)
 		if (!ship.isSunk()) return false;
 	return true;
 }
+bool Board::alreadyShot(const Coordinate& c) const {
+	CellStatus s = cellStatusAt(c);
+	return s == CellStatus::Miss || s == CellStatus::Hit || s == CellStatus::Killed;
+}
+CellStatus Board::cellStatusAt(const Coordinate& coord) const { return field_[coord.getRow()][coord.getColumn()]; }
+ShotResult Board::receiveShot(const Coordinate& c) {
+	if (!c.inBounds(fieldSize_)) throw InvalidInputError("Клетка вне поля!");
+	if (alreadyShot(c)) throw InvalidInputError("Сюда уже стреляли!");
+
+	CellStatus& cell = field_[c.getRow()][c.getColumn()];
+
+	if (cell == CellStatus::Empty) {           
+		cell = CellStatus::Miss;
+		return { ShotStatus::Miss, std::nullopt };
+	}
+
+
+	cell = CellStatus::Hit;
+	for (Ship& ship : ships_) {                
+		if (ship.contains(c)) {
+			ship.hit(c);
+			if (!ship.isSunk())
+				return { ShotStatus::Hit, std::nullopt };
+
+			for (const Coordinate& p : ship.getCoords())
+				field_[p.getRow()][p.getColumn()] = CellStatus::Killed;
+			return { ShotStatus::Killed, ship };
+		}
+	}
+
+}
+

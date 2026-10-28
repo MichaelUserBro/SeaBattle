@@ -32,7 +32,7 @@ std::optional<Coordinate> HumanPlayer::chooseShot() {
 	return input_->requestShot();
 }
 
-void HumanPlayer::onShotResult(Coordinate c, ShotResult result) {
+void HumanPlayer::onShotResult(Coordinate c, const ShotResult& result) {
 
 }
 
@@ -56,6 +56,6 @@ std::optional<Coordinate> ComputerPlayer::chooseShot() {
 	return strategy_->nextShot();
 }
 
-void ComputerPlayer::onShotResult(Coordinate c, ShotResult result) {
+void ComputerPlayer::onShotResult(Coordinate c, const ShotResult& result) {
 	strategy_->onResult(c, result);
 }
