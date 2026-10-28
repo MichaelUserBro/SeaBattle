@@ -1,4 +1,8 @@
 #include "Placement.h"
+#include <set>
+#include <map>
+#include <vector>
+#include <random>
 
 // =================== Класс PlacementValidator ===================
 
@@ -44,5 +48,79 @@ void PlacementValidator::validate(const std::vector<Ship>& ships, const Rules& r
 					throw PlacementError("Клетки корабля не являются сплошной линией!");
 			}
 		}
+
+		for (Coordinate coord : coords) {
+			if (!coord.inBounds(rules.getFieldSize())) throw PlacementError("Корабль выходить за границы поля!");
+		}
+
 	}
+	std::set<Coordinate> used;
+
+	for (const Ship& ship : ships) {
+		for (const Coordinate& c : ship.getCoords()) {
+			if (!used.insert(c).second)
+				throw PlacementError("Корабли пересекаются!");
+		}
+	}
+
+	if (!rules.getAllowTouching()) {
+		for (const Ship& ship : ships) {
+			const std::vector<Coordinate>& coords = ship.getCoords();
+			const std::set<Coordinate> own(coords.begin(), coords.end());
+
+			for (const Coordinate& c : coords) {
+				for (const Coordinate& n : c.getNeighbors(rules.getFieldSize())) {
+					if (used.count(n) && !own.count(n))
+						throw PlacementError("Корабли поставлены рядом!");
+				}
+			}
+		}
+	}
+
+	std::map<int, int> curFleet = { {4,0},{3,0},{2,0},{1,0} };
+	for (const Ship& ship : ships) {
+		curFleet[ship.getCoords().size()] += 1;
+	}
+	if (curFleet != rules.getFleet()) throw PlacementError("Неверный состав кораблей!");
+}
+
+// =================== Класс RandomFleetPlacer ===================
+
+void RandomFleetPlacer::place(Board& board, const Rules& rules) {
+	board.clear();
+	std::vector<int> lengths;
+	for (auto& pair : rules.getFleet()) {
+		for (int i = 0; i < pair.second; i++) {
+			lengths.push_back(pair.first);
+		}
+	}
+	int j = 1;
+	for (; j <= COUNT_OF_RESTART; j++) {
+		int i = 1;
+		for (int len : lengths) {
+			for (; i <= ATTEMP_PER_SHIP; i++) {
+				Orientation orient = randomOrientation();
+				int row{};
+				int col{};
+				if (orient == Orientation::Horizontal) {
+					std::uniform_int_distribution<int> row(0, rules.getFieldSize() - len);
+					std::uniform_int_distribution<int> сol(0, rules.getFieldSize() - 1);
+				}
+				else {
+					std::uniform_int_distribution<int> row(0, rules.getFieldSize() - 1);
+					std::uniform_int_distribution<int> сol(0, rules.getFieldSize() - len);
+				}
+
+				Ship ship = makeShip(Coordinate(row, col), len, orient);
+				if (PlacementValidator::canPlace(board, ship, rules)) {
+					board.placeShip(ship);
+					break;
+				}
+			}
+			if (i == ATTEMP_PER_SHIP) break;
+		}
+		if (i == ATTEMP_PER_SHIP) board.clear();
+		
+	}
+	if (j == COUNT_OF_RESTART) throw PlacementError("Не удалось расставить флот!");
 }

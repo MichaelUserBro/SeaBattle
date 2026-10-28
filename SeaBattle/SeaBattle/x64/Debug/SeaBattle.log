@@ -1,5 +1,159 @@
 ﻿  Core.cpp
-C:\ProjectOrCode\C++\Курсач\SeaBattle\src\Core.cpp(85,44): warning C4267: return: преобразование из "size_t" в "int"; возможна потеря данных
-  Game.cpp
+C:\ProjectOrCode\C++\Курсач\SeaBattle\src\Core.cpp(127,44): warning C4267: return: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\xutility(1597,23): error C3889: вызов объекта типа класса "std::less<void>": не найден соответствующий оператор вызова
+  (компиляция исходного файла "src/Core.cpp")
+      C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\type_traits(2387,31):
+      может быть "unknown-type std::less<void>::operator ()(_Ty1 &&,_Ty2 &&) noexcept(<expr>) const"
+          C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\xutility(1597,23):
+          Сбой при специализации функции-шаблона "unknown-type std::less<void>::operator ()(_Ty1 &&,_Ty2 &&) noexcept(<expr>) const"
+              C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\xutility(1597,23):
+              Со следующими аргументами шаблона:
+                  C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\xutility(1597,23):
+                  "_Ty1=Coordinate &"
+                  C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\xutility(1597,23):
+                  "_Ty2=Coordinate &"
+              C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\type_traits(2389,48):
+              бинарный "<": "Coordinate" не определяет этот оператор или преобразование к типу приемлемо к встроенному оператору
+      C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\xutility(1597,23):
+      контекст создания экземпляра шаблона (сначала самый старый)
+          C:\ProjectOrCode\C++\Курсач\SeaBattle\src\Core.cpp(124,7):
+          выполняется компиляция ссылки на экземпляр шаблон функции "void std::sort<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>>(const _RanIt,const _RanIt)"
+          with
+          [
+              _Ty=Coordinate,
+              _RanIt=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<Coordinate>>>
+          ]
+          C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8408,10):
+          выполняется компиляция ссылки на экземпляр шаблон функции "void std::sort<_RanIt,std::less<void>>(const _RanIt,const _RanIt,_Pr)"
+          with
+          [
+              _RanIt=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<Coordinate>>>,
+              _Pr=std::less<void>
+          ]
+          C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8403,10):
+          выполняется компиляция ссылки на экземпляр шаблон функции "void std::_Sort_unchecked<Coordinate*,_Fn>(_RanIt,_RanIt,__int64,_Pr)"
+          with
+          [
+              _Fn=std::less<void>,
+              _RanIt=Coordinate *,
+              _Pr=std::less<void>
+          ]
+          C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8373,18):
+          выполняется компиляция ссылки на экземпляр шаблон функции "_BidIt std::_Insertion_sort_unchecked<_RanIt,_Pr>(const _BidIt,const _BidIt,_Pr)"
+          with
+          [
+              _BidIt=Coordinate *,
+              _RanIt=Coordinate *,
+              _Pr=std::less<void>
+          ]
+          C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8248,17):
+          выполняется компиляция ссылки на экземпляр шаблон функции "bool std::_Debug_lt_pred<_Pr&,Coordinate&,Coordinate&>(std::less<void>&,_Ty1,_Ty2) noexcept(<expr>)"
+          with
+          [
+              _Pr=std::less<void>,
+              _Ty1=Coordinate &,
+              _Ty2=Coordinate &
+          ]
+  
+C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\xutility(1590,32): error C3889: вызов объекта типа класса "std::less<void>": не найден соответствующий оператор вызова
+  (компиляция исходного файла "src/Core.cpp")
+      C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\type_traits(2387,31):
+      может быть "unknown-type std::less<void>::operator ()(_Ty1 &&,_Ty2 &&) noexcept(<expr>) const"
+          C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\xutility(1590,32):
+          Сбой при специализации функции-шаблона "unknown-type std::less<void>::operator ()(_Ty1 &&,_Ty2 &&) noexcept(<expr>) const"
+              C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\xutility(1590,32):
+              Со следующими аргументами шаблона:
+                  C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\xutility(1590,32):
+                  "_Ty1=Coordinate &"
+                  C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\xutility(1590,32):
+                  "_Ty2=Coordinate &"
+              C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\type_traits(2389,48):
+              бинарный "<": "Coordinate" не определяет этот оператор или преобразование к типу приемлемо к встроенному оператору
+      C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\xutility(1590,32):
+      контекст создания экземпляра шаблона (сначала самый старый)
+          C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\xutility(1597,48):
+          выполняется компиляция ссылки на шаблон переменной "const bool _Debug_lt_pred_order_check_noexcept<std::less<void> &,Coordinate &,Coordinate &,1>"
+  
+C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\xutility(1590,5): error C2056: недопустимое выражение
+  (компиляция исходного файла "src/Core.cpp")
+  
+C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8306,16): error C3889: вызов объекта типа класса "std::less<void>": не найден соответствующий оператор вызова
+  (компиляция исходного файла "src/Core.cpp")
+      C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\type_traits(2387,31):
+      может быть "unknown-type std::less<void>::operator ()(_Ty1 &&,_Ty2 &&) noexcept(<expr>) const"
+          C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8306,16):
+          Сбой при специализации функции-шаблона "unknown-type std::less<void>::operator ()(_Ty1 &&,_Ty2 &&) noexcept(<expr>) const"
+              C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8306,16):
+              Со следующими аргументами шаблона:
+                  C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8306,16):
+                  "_Ty1=Coordinate &"
+                  C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8306,16):
+                  "_Ty2=Coordinate &"
+              C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\type_traits(2389,48):
+              бинарный "<": "Coordinate" не определяет этот оператор или преобразование к типу приемлемо к встроенному оператору
+      C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8306,16):
+      контекст создания экземпляра шаблона (сначала самый старый)
+          C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8384,26):
+          выполняется компиляция ссылки на экземпляр шаблон функции "std::pair<_RanIt,_RanIt> std::_Partition_by_median_guess_unchecked<_RanIt,_Pr>(_RanIt,_RanIt,_Pr)"
+          with
+          [
+              _RanIt=Coordinate *,
+              _Pr=std::less<void>
+          ]
+  
+C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8310,76): error C3889: вызов объекта типа класса "std::less<void>": не найден соответствующий оператор вызова
+  (компиляция исходного файла "src/Core.cpp")
+      C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\type_traits(2387,31):
+      может быть "unknown-type std::less<void>::operator ()(_Ty1 &&,_Ty2 &&) noexcept(<expr>) const"
+          C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8310,76):
+          Сбой при специализации функции-шаблона "unknown-type std::less<void>::operator ()(_Ty1 &&,_Ty2 &&) noexcept(<expr>) const"
+              C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8310,76):
+              Со следующими аргументами шаблона:
+                  C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8310,76):
+                  "_Ty1=Coordinate &"
+                  C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8310,76):
+                  "_Ty2=Coordinate &"
+              C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\type_traits(2389,48):
+              бинарный "<": "Coordinate" не определяет этот оператор или преобразование к типу приемлемо к встроенному оператору
+  
+C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8321,24): error C3889: вызов объекта типа класса "std::less<void>": не найден соответствующий оператор вызова
+  (компиляция исходного файла "src/Core.cpp")
+      C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\type_traits(2387,31):
+      может быть "unknown-type std::less<void>::operator ()(_Ty1 &&,_Ty2 &&) noexcept(<expr>) const"
+          C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8321,24):
+          Сбой при специализации функции-шаблона "unknown-type std::less<void>::operator ()(_Ty1 &&,_Ty2 &&) noexcept(<expr>) const"
+              C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8321,24):
+              Со следующими аргументами шаблона:
+                  C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8321,24):
+                  "_Ty1=Coordinate &"
+                  C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8321,24):
+                  "_Ty2=Coordinate &"
+              C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\type_traits(2389,48):
+              бинарный "<": "Coordinate" не определяет этот оператор или преобразование к типу приемлемо к встроенному оператору
+  
+C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8335,24): error C3889: вызов объекта типа класса "std::less<void>": не найден соответствующий оператор вызова
+  (компиляция исходного файла "src/Core.cpp")
+      C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\type_traits(2387,31):
+      может быть "unknown-type std::less<void>::operator ()(_Ty1 &&,_Ty2 &&) noexcept(<expr>) const"
+          C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8335,24):
+          Сбой при специализации функции-шаблона "unknown-type std::less<void>::operator ()(_Ty1 &&,_Ty2 &&) noexcept(<expr>) const"
+              C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8335,24):
+              Со следующими аргументами шаблона:
+                  C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8335,24):
+                  "_Ty1=Coordinate &"
+                  C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\algorithm(8335,24):
+                  "_Ty2=Coordinate &"
+              C:\Apps\MS Visual Studio\VC\Tools\MSVC\14.44.35207\include\type_traits(2389,48):
+              бинарный "<": "Coordinate" не определяет этот оператор или преобразование к типу приемлемо к встроенному оператору
+  
+  Placement.cpp
+C:\ProjectOrCode\C++\Курсач\SeaBattle\src\Placement.h(20,7): warning C4624: "RandomFleetPlacer": деструктор неявно определен как удаленный
+  (компиляция исходного файла "src/Placement.cpp")
+  
+C:\ProjectOrCode\C++\Курсач\SeaBattle\src\Placement.h(26,1): error C2282: "RandomFleetPlacer::~RandomFleetPlacer" не удается переопределить "FleetPlacer::~FleetPlacer"
+  (компиляция исходного файла "src/Placement.cpp")
+      C:\ProjectOrCode\C++\Курсач\SeaBattle\src\Placement.h(17,11):
+      "FleetPlacer::~FleetPlacer" не удален
+  
+C:\ProjectOrCode\C++\Курсач\SeaBattle\src\Placement.cpp(82,33): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
   Создание кода...
-  SeaBattle.vcxproj -> C:\ProjectOrCode\C++\Курсач\SeaBattle\x64\Debug\SeaBattle.exe

@@ -1,13 +1,37 @@
 #pragma once
 #include "Core.h"
 #include "Error.h"
+#include <random>
 
+// Разобраться как это блять работает!!!!!!!!!
+Orientation randomOrientation() {
+	static std::mt19937 gen{ std::random_device{}() };
+	static std::uniform_int_distribution<int> dist(0, 1);
+	return static_cast<Orientation>(dist(gen));
+}
 
+Ship makeShip(Coordinate start, int length, Orientation orient) {
+	std::vector<Coordinate> coords;
+	coords.push_back(start);
+	for (int i = 1; i < length; i++) {
+		Coordinate c;
+		if (orient == Orientation::Horizontal) { 
+			c = Coordinate(start.getRow(),start.getColumn() + i);
+		}
+		else {
+			c = Coordinate(start.getRow() + 1, start.getColumn());
+		}
+		coords.push_back(c);
+
+	}
+	return Ship(coords);
+}
 
 // =================== Класс Rules ===================
 
 int Rules::getFieldSize() const { return fieldSize_; }
 bool Rules::getAllowTouching() const { return allowTouching_; }
+std::map<int, int> Rules::getFleet() const { return fleet_; }
 
 // =================== Класс Coordinate ===================
 

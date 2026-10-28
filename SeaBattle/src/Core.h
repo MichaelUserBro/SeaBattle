@@ -2,20 +2,25 @@
 #include <algorithm>
 #include <string>
 #include <vector>
+#include <map>
 
 enum class Orientation {Horizontal, Vertical};
 enum class CellStatus {Empty, Ship, Miss, Hit, Killed}; // статус клетки
 enum class ShotStatus {Miss, Hit, Killed}; // статус выстрела
 const std::string ENG_ALF = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
+Orientation randomOrientation();
+
 
 class Rules {
 	private:
-		int fieldSize_;
-		bool allowTouching_;
+		int fieldSize_;			   // размер поля
+		bool allowTouching_;       // разрешено ли касание
+		std::map<int, int> fleet_; // map<длинна корабля, количество кораблей>
 	public:
 		int getFieldSize() const;
 		bool getAllowTouching() const;
+		std::map<int, int> getFleet() const; 
 };
 
 class Coordinate {
@@ -82,3 +87,6 @@ struct Move
 {
 
 };
+
+Ship makeShip(Coordinate start, int length, Orientation orient);
+
