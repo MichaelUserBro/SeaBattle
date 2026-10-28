@@ -1,6 +1,7 @@
 #pragma once
 #include "Core.h"
 #include "Error.h"
+#include <random>
 
 
 
@@ -13,14 +14,24 @@ class PlacementValidator {
 };
 
 class FleetPlacer {
-	virtual void place(Board&, const Rules&) = 0;
-	virtual ~FleetPlacer() = default;
+	public:
+		virtual void place(Board&, const Rules&) = 0;
+		virtual ~FleetPlacer() = default;
 };
 
 class RandomFleetPlacer : public FleetPlacer {
-	public:
-		const int COUNT_OF_RESTART = 300;
-		const int ATTEMP_PER_SHIP = 50;
+	private:
+		std::mt19937 rng_;
+		static const int COUNT_OF_RESTART = 300;
+		static const int ATTEMP_PER_SHIP = 50;
 
-		void place(Board& board, const Rules& rules);
+	public:
+
+		RandomFleetPlacer();
+		explicit RandomFleetPlacer(unsigned seed); // –¿«Œ¡–¿“‹—ﬂ  ¿  –¿¡Œ“¿≈“!!!!
+
+		~RandomFleetPlacer() = default;
+	
+		void place(Board& board, const Rules& rules) override;
+
 };

@@ -9,9 +9,6 @@ enum class CellStatus {Empty, Ship, Miss, Hit, Killed}; // статус клетки
 enum class ShotStatus {Miss, Hit, Killed}; // статус выстрела
 const std::string ENG_ALF = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-Orientation randomOrientation();
-
-
 class Rules {
 	private:
 		int fieldSize_;			   // размер поля
@@ -44,6 +41,7 @@ class Coordinate {
 		//Операторы
 
 		bool operator==(const Coordinate& other) const;
+		bool operator<(const Coordinate& other) const;
 };
 
 class Ship {

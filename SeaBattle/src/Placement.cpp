@@ -4,6 +4,7 @@
 #include <vector>
 #include <random>
 
+
 // =================== Класс PlacementValidator ===================
 
 bool PlacementValidator::canPlace(const Board& board, const Ship& ship, const Rules& rules) {
@@ -77,50 +78,64 @@ void PlacementValidator::validate(const std::vector<Ship>& ships, const Rules& r
 		}
 	}
 
-	std::map<int, int> curFleet = { {4,0},{3,0},{2,0},{1,0} };
-	for (const Ship& ship : ships) {
-		curFleet[ship.getCoords().size()] += 1;
-	}
+	std::map<int, int> curFleet;
+	for (const Ship& ship : ships)
+		++curFleet[ship.getCoords().size()];
 	if (curFleet != rules.getFleet()) throw PlacementError("Неверный состав кораблей!");
 }
 
 // =================== Класс RandomFleetPlacer ===================
 
+// Placement.cpp
+RandomFleetPlacer::RandomFleetPlacer() : rng_(std::random_device{}()) {} // РАЗОБРАТЬСЯ КАК РАБОТАЕТ!!!!
+RandomFleetPlacer::RandomFleetPlacer(unsigned seed) : rng_(seed) {} // РАЗОБРАТЬСЯ КАК РАБОТАЕТ!!!!
+
 void RandomFleetPlacer::place(Board& board, const Rules& rules) {
-	board.clear();
+
 	std::vector<int> lengths;
-	for (auto& pair : rules.getFleet()) {
-		for (int i = 0; i < pair.second; i++) {
-			lengths.push_back(pair.first);
-		}
-	}
-	int j = 1;
-	for (; j <= COUNT_OF_RESTART; j++) {
-		int i = 1;
+	const auto& fleet = rules.getFleet();	
+	for (auto it = fleet.rbegin(); it != fleet.rend(); ++it)
+		for (int k = 0; k < it->second; ++k)
+			lengths.push_back(it->first);
+
+
+
+	for (int restart = 0; restart <= COUNT_OF_RESTART; restart++) {
+
+		board.clear();
+		bool allPlaced = true;
+
+
 		for (int len : lengths) {
-			for (; i <= ATTEMP_PER_SHIP; i++) {
-				Orientation orient = randomOrientation();
-				int row{};
-				int col{};
-				if (orient == Orientation::Horizontal) {
-					std::uniform_int_distribution<int> row(0, rules.getFieldSize() - len);
-					std::uniform_int_distribution<int> сol(0, rules.getFieldSize() - 1);
-				}
-				else {
-					std::uniform_int_distribution<int> row(0, rules.getFieldSize() - 1);
-					std::uniform_int_distribution<int> сol(0, rules.getFieldSize() - len);
-				}
+			bool placed = false;
+			for (int attemp = 0; attemp <= ATTEMP_PER_SHIP && !placed; attemp++) {
+				Orientation orient = (std::uniform_int_distribution<int>(0, 1)(rng_) == 0)
+					? Orientation::Horizontal : Orientation::Vertical;
+
+				int size = rules.getFieldSize();
+				int maxRow = size - 1;
+				int maxCol = size - 1;
+				if (orient == Orientation::Horizontal) maxCol = size - len;
+				else                                   maxRow = size - len;
+				if (maxRow < 0 || maxCol < 0)
+					throw PlacementError("Корабль не помещается на поле!");
+
+				int row = std::uniform_int_distribution<int>(0, maxRow)(rng_);
+				int col = std::uniform_int_distribution<int>(0, maxCol)(rng_);
 
 				Ship ship = makeShip(Coordinate(row, col), len, orient);
 				if (PlacementValidator::canPlace(board, ship, rules)) {
 					board.placeShip(ship);
-					break;
+					placed = true;
 				}
 			}
-			if (i == ATTEMP_PER_SHIP) break;
+			if (!placed) {
+				allPlaced = false;
+				break;
+			}
 		}
-		if (i == ATTEMP_PER_SHIP) board.clear();
+		if (allPlaced) return;
 		
 	}
-	if (j == COUNT_OF_RESTART) throw PlacementError("Не удалось расставить флот!");
+	throw PlacementError("Не удалось расставить флот!");
 }

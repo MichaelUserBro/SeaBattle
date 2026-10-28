@@ -3,13 +3,6 @@
 #include "Error.h"
 #include <random>
 
-// Разобраться как это блять работает!!!!!!!!!
-Orientation randomOrientation() {
-	static std::mt19937 gen{ std::random_device{}() };
-	static std::uniform_int_distribution<int> dist(0, 1);
-	return static_cast<Orientation>(dist(gen));
-}
-
 Ship makeShip(Coordinate start, int length, Orientation orient) {
 	std::vector<Coordinate> coords;
 	coords.push_back(start);
@@ -42,7 +35,7 @@ int Coordinate::getRow() const { return row; }
 int Coordinate::getColumn() const { return column; }
 
 
-//Парсес - проверяет ввод пользователя и превращает его в координату
+//Парсер - проверяет ввод пользователя и превращает его в координату
 Coordinate Coordinate::parse(const std::string& text, int fieldSize) {
 	std::string s;
 	int row{};
@@ -116,6 +109,10 @@ std::vector<Coordinate> Coordinate::getNeighbors(int size) const {
 bool Coordinate::operator==(const Coordinate& other) const {
 	return row == other.row && column == other.column;
 }
+bool Coordinate::operator<(const Coordinate& other) const	 {
+	return row < other.row || column < other.column;
+}
+
 
 // =================== Класс Ship ===================
 

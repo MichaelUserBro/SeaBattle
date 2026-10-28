@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1925B88A-B3A2-4674-AEA2-276A6B915378}|SeaBattle.vcxproj|C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\src\\Core.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1925B88A-B3A2-4674-AEA2-276A6B915378}|SeaBattle.vcxproj|solutionrelative:src\\Core.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1925B88A-B3A2-4674-AEA2-276A6B915378}|SeaBattle.vcxproj|C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\src\\Placement.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1925B88A-B3A2-4674-AEA2-276A6B915378}|SeaBattle.vcxproj|solutionrelative:src\\Placement.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1925B88A-B3A2-4674-AEA2-276A6B915378}|SeaBattle.vcxproj|C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\src\\Placement.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1925B88A-B3A2-4674-AEA2-276A6B915378}|SeaBattle.vcxproj|solutionrelative:src\\Placement.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1925B88A-B3A2-4674-AEA2-276A6B915378}|SeaBattle.vcxproj|C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\src\\Core.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1925B88A-B3A2-4674-AEA2-276A6B915378}|SeaBattle.vcxproj|solutionrelative:src\\Core.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1925B88A-B3A2-4674-AEA2-276A6B915378}|SeaBattle.vcxproj|C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\src\\Core.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -34,30 +34,30 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Placement.h",
               "DocumentMoniker": "C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\src\\Placement.h",
               "RelativeDocumentMoniker": "src\\Placement.h",
               "ToolTip": "C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\src\\Placement.h",
               "RelativeToolTip": "src\\Placement.h",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAqwAoAAAA5AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-10-27T10:17:03.215Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Placement.cpp",
               "DocumentMoniker": "C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\src\\Placement.cpp",
               "RelativeDocumentMoniker": "src\\Placement.cpp",
               "ToolTip": "C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\src\\Placement.cpp",
               "RelativeToolTip": "src\\Placement.cpp",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAAAAgAAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-10-27T10:17:31.177Z",
               "EditorCaption": ""
@@ -90,7 +90,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Core.h",
               "DocumentMoniker": "C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\src\\Core.h",
               "RelativeDocumentMoniker": "src\\Core.h",
@@ -109,7 +109,7 @@
               "RelativeDocumentMoniker": "src\\Core.cpp",
               "ToolTip": "C:\\ProjectOrCode\\C\u002B\u002B\\\u041A\u0443\u0440\u0441\u0430\u0447\\SeaBattle\\src\\Core.cpp",
               "RelativeToolTip": "src\\Core.cpp",
-              "ViewState": "AgIAABAAAAAAAAAAAAAIwBgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-10-27T08:45:06.451Z",
               "EditorCaption": ""
