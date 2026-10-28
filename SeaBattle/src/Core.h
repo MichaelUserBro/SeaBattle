@@ -80,9 +80,13 @@ class Board {
 		bool allSunk();
 
 };
-
+// Пустая хуйня (заглушка)
 struct Move
 {
+
+}; 
+// Пустая хуйня (заглушка)
+struct ShotResult {
 
 };
 
