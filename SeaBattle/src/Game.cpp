@@ -187,3 +187,7 @@ bool Game::isFinished() const {
 }
 
 size_t Game::getTurnCount() const { return history_.size(); }
+
+void Game::restore(std::vector<Move> history, int currentIndex) {
+	// Будет реализовано при создании файловой подсистемы
+}

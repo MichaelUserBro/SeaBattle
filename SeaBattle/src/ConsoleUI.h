@@ -22,6 +22,7 @@ class ConsoleRenderer : public GameObserver {
 		void onGameStarted() override;
 		void onShot(int playerIndex, Coordinate coord, const ShotResult& result) override;
 		void onGameFinished(int winnerIndex) override;
+		void onInvalidInput(const std::string& message) override;
 };
 
 class ConsoleInput : public InputProvider {

@@ -97,6 +97,10 @@ void ConsoleRenderer::onGameFinished(int winnerIndex) {
     out_ << "\nВсего ходов: " << game_.getHistory().size() << '\n';
 }
 
+void ConsoleRenderer::onInvalidInput(const std::string& message) {
+    out_ << "Ошибка: " << message << "\n\n";
+}
+
 
 
 // =================== Класс ConsoleInput ===================
@@ -205,10 +209,13 @@ bool ConsoleInput::requestPlacement(Board& board, const Rules& rules) {
             throw std::runtime_error("Ввод завершён (EOF)");
         }
 
+        if (line == "1") {
+            return placeManually(board, rules);
+        }
         if (line == "2") {
             return placeRandomly(board, rules);
         }
-        if (line == "1" || line == "3") {
+        if (line == "3") {
             out_ << "Этот вариант пока не реализован.\n";
             continue;
         }
