@@ -12,7 +12,7 @@ Ship makeShip(Coordinate start, int length, Orientation orient) {
 			c = Coordinate(start.getRow(),start.getColumn() + i);
 		}
 		else {
-			c = Coordinate(start.getRow() + 1, start.getColumn());
+			c = Coordinate(start.getRow() + i, start.getColumn());
 		}
 		coords.push_back(c);
 
@@ -59,10 +59,10 @@ Coordinate Coordinate::parse(const std::string& text, int fieldSize) {
 	s[0] = toupper(s[0]);
 
 	if ('A' <= s[0] && s[0] <= ENG_ALF[fieldSize - 1]) {
-		row = s[0] - 'A';
+		col = s[0] - 'A';
 	}
 	else {
-		throw InvalidInputError(std::string("Строка должна быть буквой A-") + ENG_ALF[fieldSize - 1] + "!");
+		throw InvalidInputError(std::string("Столбец должна быть буквой A-") + ENG_ALF[fieldSize - 1] + "!");
 	}
 
 	// Проверка числа
@@ -72,7 +72,7 @@ Coordinate Coordinate::parse(const std::string& text, int fieldSize) {
 	}
 	for (char c : s) {
 		if (!isdigit(c)) {
-			throw InvalidInputError("Столбец должен обозначаться числом!");
+			throw InvalidInputError("Строка должен обозначаться числом!");
 		}
 	}
 	int num{};
@@ -84,10 +84,10 @@ Coordinate Coordinate::parse(const std::string& text, int fieldSize) {
 	}
 	
 	if (num <= fieldSize && num > 0) {
-		col = num - 1;
+		row = num - 1;
 	}
 	else {
-		throw InvalidInputError("Номер столбца должен быть от 1 до " + std::to_string(fieldSize) + "!");
+		throw InvalidInputError("Номер строки должен быть от 1 до " + std::to_string(fieldSize) + "!");
 	}
 
 	return Coordinate(row, col);
@@ -115,7 +115,8 @@ bool Coordinate::operator==(const Coordinate& other) const {
 	return row == other.row && column == other.column;
 }
 bool Coordinate::operator<(const Coordinate& other) const	 {
-	return row < other.row || column < other.column;
+	if (row != other.row) return row < other.row;
+	return column < other.column;
 }
 
 

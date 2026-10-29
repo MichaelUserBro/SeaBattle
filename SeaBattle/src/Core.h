@@ -66,10 +66,12 @@ class Ship {
 
 };
 
-// Пустая хуйня (заглушка)
+
 struct Move
 {
-
+	int playerIndex;
+	Coordinate coord;
+	ShotStatus outcome;
 };
 
 struct ShotResult {

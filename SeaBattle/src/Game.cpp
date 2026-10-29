@@ -161,7 +161,7 @@ bool Game::step() {
 		return false;
 	}
 
-	//history_.push_back(Move{ currentPlayer_, *shot, result.outcome });
+	history_.push_back(Move{ currentPlayer_, *shot, result.outcome });
 
 	attacker.onShotResult(*shot, result);
 
