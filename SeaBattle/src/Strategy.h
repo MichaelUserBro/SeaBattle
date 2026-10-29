@@ -1,6 +1,7 @@
 #pragma once
 #include "core.h"
 #include <random>
+#include <memory>
 #include <vector>
 #include<deque>
 
@@ -61,3 +62,8 @@ private:
 	std::vector<int> remaining_;          // длины непотопленных кораблей
 	std::vector<std::vector<int>> weights_;
 };
+
+
+std::unique_ptr<ShootingStrategy> createStrategy(Difficulty difficulty,
+	const Rules& rules,
+	unsigned seed = std::random_device{}());

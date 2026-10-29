@@ -130,3 +130,5 @@ void ProbabilityStrategy::onResult(Coordinate c, ShotResult r) {
             remaining_.erase(it);
     }
 }
+
+

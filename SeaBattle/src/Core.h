@@ -12,10 +12,10 @@ const std::string ENG_ALF = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 class Rules {
 	private:
-		int fieldSize_;			   // размер поля
-		bool allowTouching_;	   // разрешено ли касание
-		bool isShooterContinuesAfterHit_;
-		std::map<int, int> fleet_; // map<длинна корабля, количество кораблей>
+		int fieldSize_ = 10;			   // размер поля
+		bool allowTouching_ = false;	   // разрешено ли касание
+		bool isShooterContinuesAfterHit_ = true;
+		std::map<int, int> fleet_ = { {4,1},{3,2},{2,3},{1,4} }; // map<длинна корабля, количество кораблей>
 	public:
 		int getFieldSize() const;
 		bool getAllowTouching() const;

@@ -55,43 +55,113 @@ void Game::addObserver(GameObserver* obs) {
 	observers_.push_back(obs);
 }
 
+
+// Старая версия, с багами, но написана мной, менее ИИшная
+//bool Game::setup() {
+//	if (currentState_ != GameState::Placement) throw GameStateError();
+//	if(!players_[0]->placeFleet(rules_)) return false;
+//	players_[1]->placeFleet(rules_);
+//
+//	for (auto& p : players_) {
+//		PlacementValidator::validate(p->getBoard().getShips(), rules_);
+//	}
+//	currentState_ = GameState::Playing;
+//	currentPlayer_ = 0;
+//	history_.clear();
+//	
+//	for (auto& obs : observers_) {
+//		obs->onGameStarted();
+//	}
+//
+//	return true;
+//}
+
 bool Game::setup() {
-	if (currentState_ != GameState::Placement) throw GameStateError();
-	if(!players_[0]->placeFleet(rules_)) return false;
-	players_[1]->placeFleet(rules_);
+	if (currentState_ != GameState::Placement)
+		throw GameStateError("setup() вызван не в состоянии Placement");
 
 	for (auto& p : players_) {
-		PlacementValidator::validate(p->getBoard().getShips(), rules_);
+		if (!p->placeFleet(rules_))
+			return false;
 	}
+
+	for (auto& p : players_)
+		PlacementValidator::validate(p->getBoard().getShips(), rules_);
+
 	currentState_ = GameState::Playing;
 	currentPlayer_ = 0;
 	history_.clear();
-	
-	for (auto& obs : observers_) {
+
+	for (GameObserver* obs : observers_)
 		obs->onGameStarted();
-	}
+
+	return true;
 }
+// Старая версия, с багами, но написана мной, менее ИИшная
+//bool Game::step() {
+//	if (currentState_ != GameState::Playing) throw GameStateError();
+//
+//	Player& attacker = *players_[currentPlayer_];
+//	Player& defender = *players_[1 - currentPlayer_];
+//
+//	auto shot = attacker.chooseShot();
+//	
+//	ShotResult result;
+//	try {
+//		result = defender.getBoard().receiveShot(*shot);
+//	}
+//	catch(InvalidInputError e){
+//		for (auto obs : observers_) {
+//			obs->onInvalidInput(e.what());
+//		}
+//		return false;
+//	}
+//
+//	// Тут позже будет добавления хода в историю
+//
+//	attacker.onShotResult(*shot, result);
+//
+//	for (GameObserver* obs : observers_)
+//		obs->onShot(currentPlayer_, *shot, result);
+//
+//	if (defender.getBoard().allSunk()) {
+//		currentState_ = GameState::Finished;
+//		winner_ = currentPlayer_;
+//		for (GameObserver* obs : observers_)
+//			obs->onGameFinished(winner_);
+//		return true;
+//	}
+//
+//	// Кто ходит дальше
+//	if (result.outcome == ShotStatus::Miss || !rules_.isContinue())
+//		currentPlayer_ = 1 - currentPlayer_;
+//	
+//	return true;
+//
+//}
 
 bool Game::step() {
-	if (currentState_ != GameState::Playing) throw GameStateError();
+	if (currentState_ != GameState::Playing)
+		throw GameStateError("step() вызван, когда партия не идёт");
 
 	Player& attacker = *players_[currentPlayer_];
 	Player& defender = *players_[1 - currentPlayer_];
 
 	auto shot = attacker.chooseShot();
-	
+	if (!shot.has_value())
+		return false;
+
 	ShotResult result{};
 	try {
-		defender.getBoard().receiveShot(*shot);
+		result = defender.getBoard().receiveShot(*shot);
 	}
-	catch(InvalidInputError e){
-		for (auto obs : observers_) {
+	catch (const InvalidInputError& e) {
+		for (GameObserver* obs : observers_)
 			obs->onInvalidInput(e.what());
-		}
 		return false;
 	}
 
-	// Тут позже будет добавления хода в историю
+	//history_.push_back(Move{ currentPlayer_, *shot, result.outcome });
 
 	attacker.onShotResult(*shot, result);
 
@@ -106,12 +176,10 @@ bool Game::step() {
 		return true;
 	}
 
-	// Кто ходит дальше
 	if (result.outcome == ShotStatus::Miss || !rules_.isContinue())
 		currentPlayer_ = 1 - currentPlayer_;
-	
-	return true;
 
+	return true;
 }
 
 bool Game::isFinished() const {

@@ -29,6 +29,9 @@ class ConsoleInput : public InputProvider {
 		const Rules& rules_;
 		std::istream& in_;
 		std::ostream& out_;
+
+		bool placeRandomly(Board& board, const Rules& rules);
+		bool placeManually(Board& board, const Rules& rules);
 	public:
 		ConsoleInput(const Rules& rules, std::istream& in = std::cin, std::ostream& out = std::cout);
 

@@ -1,4 +1,6 @@
+#include <sstream>
 #include "ConsoleUI.h"
+#include "Placement.h"
 
 // =================== Класс ConsoleRenderer ===================
 
@@ -99,15 +101,118 @@ void ConsoleRenderer::onGameFinished(int winnerIndex) {
 
 // =================== Класс ConsoleInput ===================
 
+bool ConsoleInput::placeRandomly(Board& board, const Rules& rules) {
+    RandomFleetPlacer placer;
+    placer.place(board, rules);
+    return true;
+}
+
+bool ConsoleInput::placeManually(Board& board, const Rules& rules) {
+    board.clear();
+    std::map<int, int> left = rules.getFleet();   // подставь своё имя поля/геттера
+    int remaining = 0;
+    for (const auto& p : left) remaining += p.second;
+
+    out_ << "Формат: <клетка> <длина> <H|V>, например A1 4 H. Выход: q\n";
+
+    while (remaining > 0) {
+        out_ << "Осталось:";
+        for (const auto& p : left)
+            if (p.second > 0) out_ << ' ' << p.second << "x" << p.first;
+        out_ << "\n> ";
+
+        std::string line;
+        if (!std::getline(in_, line))
+            throw std::runtime_error("Ввод завершён (EOF)");
+        if (line == "q" || line == "Q") {
+            board.clear();
+            return false;
+        }
+
+        std::istringstream iss(line);
+        std::string cellText, dirText;
+        int len = 0;
+        if (!(iss >> cellText >> len >> dirText)) {
+            out_ << "Ошибка: ожидается формат вроде A1 4 H.\n";
+            continue;
+        }
+
+        Orientation orient;
+        if (dirText == "H" || dirText == "h")      orient = Orientation::Horizontal;
+        else if (dirText == "V" || dirText == "v") orient = Orientation::Vertical;
+        else {
+            out_ << "Ошибка: направление H или V.\n";
+            continue;
+        }
+
+        auto it = left.find(len);
+        if (it == left.end() || it->second == 0) {
+            out_ << "Ошибка: кораблей такой длины не осталось.\n";
+            continue;
+        }
+
+        try {
+            Coordinate start = Coordinate::parse(cellText, rules.getFieldSize());
+            Ship ship = makeShip(start, len, orient);
+            if (!PlacementValidator::canPlace(board, ship, rules)) {
+                out_ << "Ошибка: сюда корабль поставить нельзя "
+                    "(выход за поле, наложение или касание).\n";
+                continue;
+            }
+            board.placeShip(ship);
+            --it->second;
+            --remaining;
+        }
+        catch (const std::exception& e) {
+            out_ << "Ошибка: " << e.what() << '\n';
+        }
+    }
+    return true;
+}
+
 ConsoleInput::ConsoleInput(const Rules& rules, std::istream& in, std::ostream& out)
     : rules_(rules), in_(in), out_(out) {
 }
 
 std::optional<Coordinate> ConsoleInput::requestShot() {
-    return std::nullopt;
+    while (true) {
+        out_ << "Ваш выстрел (например, B5): ";
+
+        std::string line;
+        if (!std::getline(in_, line)) {
+            throw std::runtime_error("Ввод завершён (EOF)");
+        }
+
+        try {
+            return Coordinate::parse(line, rules_.getFieldSize());
+        }
+        catch (const InvalidInputError& e) {
+            out_ << "Ошибка: " << e.what() << ". Попробуйте ещё раз.\n";
+        }
+    }
 }
 
 bool ConsoleInput::requestPlacement(Board& board, const Rules& rules) {
-    return false;
+    while (true) {
+        out_ << "Как расставить корабли?\n"
+            << "  1 - вручную\n"
+            << "  2 - случайно\n"
+            << "  3 - из файла\n"
+            << "Ваш выбор: ";
+
+        std::string line;
+        if (!std::getline(in_, line)) {
+            throw std::runtime_error("Ввод завершён (EOF)");
+        }
+
+        if (line == "2") {
+            return placeRandomly(board, rules);
+        }
+        if (line == "1" || line == "3") {
+            out_ << "Этот вариант пока не реализован.\n";
+            continue;
+        }
+        out_ << "Ошибка: введите 1, 2 или 3.\n";
+    }
 }
 
