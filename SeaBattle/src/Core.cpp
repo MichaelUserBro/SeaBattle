@@ -3,6 +3,7 @@
 #include "Error.h"
 #include <random>
 
+// Создание корабля
 Ship makeShip(Coordinate start, int length, Orientation orient) {
 	std::vector<Coordinate> coords;
 	coords.push_back(start);
@@ -20,16 +21,31 @@ Ship makeShip(Coordinate start, int length, Orientation orient) {
 	return Ship(coords);
 }
 
+// =================== Структура Rules ===================
+
+// Конструкторы:
+Rules::Rules() : fieldSize(10), allowTouching(false),
+isShooterContinuesAfterHit(true), fleet({ {4,1},{3,2},{2,3},{1,4} }){}
+Rules::Rules(int newFieldSize, bool newAllowTouching, 
+	bool newContinueShoot, std::map<int, int> newFleet) {
+	fieldSize = newFieldSize;
+	allowTouching = newAllowTouching;
+	isShooterContinuesAfterHit = newContinueShoot;
+	fleet = newFleet;
+}
+
 // =================== Класс Coordinate ===================
 
-Coordinate::Coordinate() : row(0), column(0) {};
-Coordinate::Coordinate(int r, int c) : row(r), column(c) {};
+// Конструкторы:
+Coordinate::Coordinate() : row_(0), column_(0) {};
+Coordinate::Coordinate(int r, int c) : row_(r), column_(c) {};
 
-int Coordinate::getRow() const { return row; }
-int Coordinate::getColumn() const { return column; }
+// Геттеры:
+int Coordinate::getRow() const { return row_; }
+int Coordinate::getColumn() const { return column_; }
 
-
-//Парсер - проверяет ввод пользователя и превращает его в координату
+// Методы:
+// Парсинг пользовательского ввода и преобразование его в координату
 Coordinate Coordinate::parse(const std::string& text, int fieldSize) {
 	std::string s;
 	int row{};
@@ -84,59 +100,73 @@ Coordinate Coordinate::parse(const std::string& text, int fieldSize) {
 
 	return Coordinate(row, col);
 }
+
+// Проверка находится ли точка внутри границ поля
 bool Coordinate::inBounds(int size) const {
-	return row >= 0 && row < size && column >= 0 && column < size;
+	return row_ >= 0 && row_ < size && column_ >= 0 && column_ < size;
 }
+
+// Создаёт вектор всех соседей
 std::vector<Coordinate> Coordinate::getNeighbors(int size) const {
 	std::vector<Coordinate> result;
 	for (int dr = -1; dr <= 1; ++dr) {
 		for (int dc = -1; dc <= 1; ++dc) {
 			if (dr == 0 && dc == 0) continue;      
-			Coordinate n{ row + dr, column + dc };
+			Coordinate n{ row_ + dr, column_ + dc };
 			if (n.inBounds(size))
 				result.push_back(n);
 		}
 	}
 	return result;
 }
+
+// Превращает значение координат в строку
 std::string Coordinate::toString() const {
-	return std::string(1, static_cast<char>('A' + column)) + std::to_string(row + 1);
+	return std::string(1, static_cast<char>('A' + column_)) + std::to_string(row_ + 1);
 }
 
+// Операторы:
 bool Coordinate::operator==(const Coordinate& other) const {
-	return row == other.row && column == other.column;
+	return row_ == other.row_ && column_ == other.column_;
 }
 bool Coordinate::operator<(const Coordinate& other) const	 {
-	if (row != other.row) return row < other.row;
-	return column < other.column;
+	if (row_ != other.row_) return row_ < other.row_;
+	return column_ < other.column_;
 }
 
 
 // =================== Класс Ship ===================
 
+// Конструкторы:
 Ship::Ship() : coords_(), hitStatus_() {};
 Ship::Ship(const std::vector<Coordinate>& coords) : coords_(coords), hitStatus_(coords.size(), false) {
 	std::sort(coords_.begin(), coords_.end());
 };
 
+// Геттеры:
 int Ship::getLength() { return coords_.size(); }
 std::vector<Coordinate> Ship::getCoords() const { return coords_; }
 
-
+// Методы:
+// Проверка содердит ли корабль клетку coord
 bool Ship::contains(const Coordinate& coord) const {
 	for (const Coordinate& c : coords_) {
 		if (c == coord) return true;
 	}
 	return false;
 }
+
+// Проверка потоплен ли корабль
 bool Ship::isSunk() {
 	for (const bool& flag : hitStatus_) {
 		if (!flag) return false;
 	}
 	return true;
 }
+
+// Присваивает попадание в клекту с
 void Ship::hit(const Coordinate& c) {
-	for (size_t i = 0; i < coords_.size(); ++i) {
+	for (int i = 0; i < coords_.size(); ++i) {
 		if (coords_[i] == c) {
 			hitStatus_[i] = true;
 			return;
@@ -146,11 +176,15 @@ void Ship::hit(const Coordinate& c) {
 
 // =================== Класс Board ===================
 
+// Конструкторы:
 Board::Board() : field_(), ships_(), fieldSize_() {};
 Board::Board(int size) : field_(size, std::vector<CellStatus>(size, CellStatus::Empty)), ships_(), fieldSize_(size) {};
 
+// Геттеры:
 std::vector<Ship> Board::getShips() const { return ships_; }
 
+// Методы:
+// Выставление корабля
 void Board::placeShip(Ship ship) {
 
 	for (Coordinate coords : ship.getCoords()) {
@@ -161,22 +195,32 @@ void Board::placeShip(Ship ship) {
 	}
 	ships_.push_back(ship);
 }
+
+// Очистка игрового поля
 void Board::clear() {
 	ships_.clear();
 	for (int i = 0; i < fieldSize_; i++)
 		for (int j = 0; j < fieldSize_; j++)
 			field_[i][j] = CellStatus::Empty;
 }
+
+// Проверка все ли корабли потоплены
 bool Board::allSunk() {
 	for (Ship ship : ships_)
 		if (!ship.isSunk()) return false;
 	return true;
 }
+
+// Проверка стреляли ли уже в точку с
 bool Board::alreadyShot(const Coordinate& c) const {
 	CellStatus s = cellStatusAt(c);
 	return s == CellStatus::Miss || s == CellStatus::Hit || s == CellStatus::Killed;
 }
+
+// Определение статуса точки coord
 CellStatus Board::cellStatusAt(const Coordinate& coord) const { return field_[coord.getRow()][coord.getColumn()]; }
+
+// Результат выстрела по клетке
 ShotResult Board::receiveShot(const Coordinate& c) {
 	if (!c.inBounds(fieldSize_)) throw InvalidInputError("Клетка вне поля!");
 	if (alreadyShot(c)) throw InvalidInputError("Сюда уже стреляли!");
@@ -203,4 +247,3 @@ ShotResult Board::receiveShot(const Coordinate& c) {
 	}
 
 }
-

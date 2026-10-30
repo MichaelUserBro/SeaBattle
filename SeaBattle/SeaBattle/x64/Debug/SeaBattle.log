@@ -1,5 +1,13 @@
-﻿  Placement.cpp
+﻿  ConsoleUIcpp.cpp
+  Core.cpp
+C:\ProjectOrCode\C++\Курсач\SeaBattle\src\Core.cpp(134,44): warning C4267: return: преобразование из "size_t" в "int"; возможна потеря данных
+  Game.cpp
+  Main.cpp
+  Placement.cpp
 C:\ProjectOrCode\C++\Курсач\SeaBattle\src\Placement.cpp(83,35): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+  Player.cpp
   Strategy.cpp
   Создание кода...
+C:\ProjectOrCode\C++\Курсач\SeaBattle\src\Core.cpp(217,1): warning C4715: Board::receiveShot: значение возвращается не при всех путях выполнения
+C:\ProjectOrCode\C++\Курсач\SeaBattle\src\ConsoleUIcpp.cpp(16,1): warning C4715: ConsoleRenderer::cellSymbol: значение возвращается не при всех путях выполнения
   SeaBattle.vcxproj -> C:\ProjectOrCode\C++\Курсач\SeaBattle\x64\Debug\SeaBattle.exe
