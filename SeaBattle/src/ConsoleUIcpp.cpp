@@ -16,7 +16,7 @@ char ConsoleRenderer::cellSymbol(CellStatus state, bool hideShips) {
 }
 
 std::string ConsoleRenderer::renderHeader() const {
-    const int size = game_.getRules().getFieldSize();
+    const int size = game_.getRules().fieldSize;
     std::string line = "   ";
     for (int col = 0; col < size; ++col) {
         if (col > 0) line += ' ';
@@ -26,7 +26,7 @@ std::string ConsoleRenderer::renderHeader() const {
 }
 
 std::string ConsoleRenderer::renderRow(const Board& board, int row, bool hideShips) const {
-    const int size = game_.getRules().getFieldSize();
+    const int size = game_.getRules().fieldSize;
     std::string label = std::to_string(row + 1);
     if (label.size() < 2) label = " " + label;
 
@@ -48,7 +48,7 @@ std::string ConsoleRenderer::outcomeText(ShotStatus outcome) {
 }
 
 void ConsoleRenderer::printBoards(bool revealAll) {
-    const int size = game_.getRules().getFieldSize();
+    const int size = game_.getRules().fieldSize;
     const std::string gap = "    ";
     const std::string header = renderHeader();
 
@@ -113,7 +113,7 @@ bool ConsoleInput::placeRandomly(Board& board, const Rules& rules) {
 
 bool ConsoleInput::placeManually(Board& board, const Rules& rules) {
     board.clear();
-    std::map<int, int> left = rules.getFleet();   // подставь своё имя поля/геттера
+    std::map<int, int> left = rules.fleet;   // подставь своё имя поля/геттера
     int remaining = 0;
     for (const auto& p : left) remaining += p.second;
 
@@ -156,7 +156,7 @@ bool ConsoleInput::placeManually(Board& board, const Rules& rules) {
         }
 
         try {
-            Coordinate start = Coordinate::parse(cellText, rules.getFieldSize());
+            Coordinate start = Coordinate::parse(cellText, rules.fieldSize);
             Ship ship = makeShip(start, len, orient);
             if (!PlacementValidator::canPlace(board, ship, rules)) {
                 out_ << "Ошибка: сюда корабль поставить нельзя "
@@ -188,7 +188,7 @@ std::optional<Coordinate> ConsoleInput::requestShot() {
         }
 
         try {
-            return Coordinate::parse(line, rules_.getFieldSize());
+            return Coordinate::parse(line, rules_.fieldSize);
         }
         catch (const InvalidInputError& e) {
             out_ << "Ошибка: " << e.what() << ". Попробуйте ещё раз.\n";

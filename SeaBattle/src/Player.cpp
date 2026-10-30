@@ -2,7 +2,7 @@
 
 // =================== Класс Player ===================
 
-Player::Player(std::string name, const Rules& rules) : name_(name), board_(Board(rules.getFieldSize())){}
+Player::Player(std::string name, const Rules& rules) : name_(name), board_(Board(rules.fieldSize)){}
 
 const std::string& Player::getName() const { // Проверить можно ли использовать другой тип данных
 	return name_;

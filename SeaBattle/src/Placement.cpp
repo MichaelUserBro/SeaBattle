@@ -11,11 +11,11 @@ bool PlacementValidator::canPlace(const Board& board, const Ship& ship, const Ru
 	if (ship.getCoords().empty()) return false; // Проверка, что корабль занимает хотя бы одну клетку 
 
 	for (const Coordinate& coord : ship.getCoords()) {
-		if (!coord.inBounds(rules.getFieldSize())) return false; // Проверка, что корабль находится внутри границ поля
+		if (!coord.inBounds(rules.fieldSize)) return false; // Проверка, что корабль находится внутри границ поля
 		if (board.cellStatusAt(coord) != CellStatus::Empty) return false; // Проверка, что все клетки для коробля пустые
 
-		if (!rules.getAllowTouching()) { // Если запрещено касание двух кораблей
-			for (const Coordinate& c : coord.getNeighbors(rules.getFieldSize()))
+		if (!rules.allowTouching) { // Если запрещено касание двух кораблей
+			for (const Coordinate& c : coord.getNeighbors(rules.fieldSize))
 				if (board.cellStatusAt(c) == CellStatus::Ship) return false; // Проверка, что нет кораблей в соседних клетках
 		}
 	}
@@ -51,7 +51,7 @@ void PlacementValidator::validate(const std::vector<Ship>& ships, const Rules& r
 		}
 
 		for (Coordinate coord : coords) {
-			if (!coord.inBounds(rules.getFieldSize())) throw PlacementError("Корабль выходить за границы поля!");
+			if (!coord.inBounds(rules.fieldSize)) throw PlacementError("Корабль выходить за границы поля!");
 		}
 
 	}
@@ -64,13 +64,13 @@ void PlacementValidator::validate(const std::vector<Ship>& ships, const Rules& r
 		}
 	}
 
-	if (!rules.getAllowTouching()) {
+	if (!rules.allowTouching) {
 		for (const Ship& ship : ships) {
 			const std::vector<Coordinate>& coords = ship.getCoords();
 			const std::set<Coordinate> own(coords.begin(), coords.end());
 
 			for (const Coordinate& c : coords) {
-				for (const Coordinate& n : c.getNeighbors(rules.getFieldSize())) {
+				for (const Coordinate& n : c.getNeighbors(rules.fieldSize)) {
 					if (used.count(n) && !own.count(n))
 						throw PlacementError("Корабли поставлены рядом!");
 				}
@@ -81,7 +81,7 @@ void PlacementValidator::validate(const std::vector<Ship>& ships, const Rules& r
 	std::map<int, int> curFleet;
 	for (const Ship& ship : ships)
 		++curFleet[ship.getCoords().size()];
-	if (curFleet != rules.getFleet()) throw PlacementError("Неверный состав кораблей!");
+	if (curFleet != rules.fleet) throw PlacementError("Неверный состав кораблей!");
 }
 
 // =================== Класс RandomFleetPlacer ===================
@@ -93,7 +93,7 @@ RandomFleetPlacer::RandomFleetPlacer(unsigned seed) : rng_(seed) {} // РАЗОБРАТЬ
 void RandomFleetPlacer::place(Board& board, const Rules& rules) {
 
 	std::vector<int> lengths;
-	const auto& fleet = rules.getFleet();	
+	const auto& fleet = rules.fleet;	
 	for (auto it = fleet.rbegin(); it != fleet.rend(); ++it)
 		for (int k = 0; k < it->second; ++k)
 			lengths.push_back(it->first);
@@ -112,7 +112,7 @@ void RandomFleetPlacer::place(Board& board, const Rules& rules) {
 				Orientation orient = (std::uniform_int_distribution<int>(0, 1)(rng_) == 0)
 					? Orientation::Horizontal : Orientation::Vertical;
 
-				int size = rules.getFieldSize();
+				int size = rules.fieldSize;
 				int maxRow = size - 1;
 				int maxCol = size - 1;
 				if (orient == Orientation::Horizontal) maxCol = size - len;

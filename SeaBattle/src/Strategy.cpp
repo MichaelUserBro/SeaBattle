@@ -6,13 +6,13 @@
 
 ShootingStrategy::ShootingStrategy(const Rules& rules, unsigned seed)
     : rules_(rules),
-    knowledge_(rules.getFieldSize(), std::vector<CellStatus>(rules.getFieldSize(), CellStatus::Empty)),
+    knowledge_(rules.fieldSize, std::vector<CellStatus>(rules.fieldSize, CellStatus::Empty)),
     rng_(seed != 0 ? seed : std::random_device{}())
 {
 }
 
 bool ShootingStrategy::isUnfired(Coordinate c) const{
-    return c.inBounds(rules_.getFieldSize()) && knowledge_[c.getRow()][c.getColumn()] == CellStatus::Empty;
+    return c.inBounds(rules_.fieldSize) && knowledge_[c.getRow()][c.getColumn()] == CellStatus::Empty;
 }
 void ShootingStrategy::recordResult(Coordinate c,const ShotResult& r) {
     if(r.outcome == ShotStatus::Miss) knowledge_[c.getRow()][c.getColumn()] = CellStatus::Miss;
@@ -20,8 +20,8 @@ void ShootingStrategy::recordResult(Coordinate c,const ShotResult& r) {
     else {
         for (const Coordinate& cell : r.sunkShip->getCoords()) {
             knowledge_[cell.getRow()][cell.getColumn()] = CellStatus::Killed;
-            if (!rules_.getAllowTouching()) {
-                for (const Coordinate& n : cell.getNeighbors(rules_.getFieldSize()))
+            if (!rules_.allowTouching) {
+                for (const Coordinate& n : cell.getNeighbors(rules_.fieldSize))
                     if (knowledge_[n.getRow()][n.getColumn()] == CellStatus::Empty)
                         knowledge_[n.getRow()][n.getColumn()] = CellStatus::Miss;
             }
@@ -32,8 +32,8 @@ void ShootingStrategy::recordResult(Coordinate c,const ShotResult& r) {
 }
 std::vector<Coordinate> ShootingStrategy::emptyCells() const {
     std::vector<Coordinate> result;
-    for (int r = 0; r < rules_.getFieldSize(); ++r)
-        for (int c = 0; c < rules_.getFieldSize(); ++c)
+    for (int r = 0; r < rules_.fieldSize; ++r)
+        for (int c = 0; c < rules_.fieldSize; ++c)
             if (knowledge_[r][c] == CellStatus::Empty)
                 result.push_back(Coordinate{ r, c });
     return result;
@@ -43,9 +43,9 @@ std::vector<Coordinate> ShootingStrategy::emptyCells() const {
 
 RandomStrategy::RandomStrategy(const Rules& rules, unsigned seed)
     : ShootingStrategy(rules, seed) {
-    order_.reserve(rules_.getFieldSize() * rules_.getFieldSize());
-    for (int r = 0; r < rules_.getFieldSize(); ++r)
-        for (int c = 0; c < rules_.getFieldSize(); ++c)
+    order_.reserve(rules_.fieldSize * rules_.fieldSize);
+    for (int r = 0; r < rules_.fieldSize; ++r)
+        for (int c = 0; c < rules_.fieldSize; ++c)
             order_.push_back(Coordinate{ r, c });
     std::shuffle(order_.begin(), order_.end(), rng_);
 }
@@ -100,8 +100,8 @@ void HuntTargetStrategy::onResult(Coordinate c, ShotResult r) {
 
 ProbabilityStrategy::ProbabilityStrategy(const Rules& rules, unsigned seed)
     : ShootingStrategy(rules, seed),
-    weights_(rules.getFieldSize(), std::vector<int>(rules.getFieldSize(), 0)) {
-    for (const auto& [length, count] : rules_.getFleet())
+    weights_(rules.fieldSize, std::vector<int>(rules.fieldSize, 0)) {
+    for (const auto& [length, count] : rules_.fleet)
         for (int i = 0; i < count; ++i)
             remaining_.push_back(length);
 }

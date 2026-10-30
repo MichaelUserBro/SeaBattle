@@ -176,7 +176,7 @@ bool Game::step() {
 		return true;
 	}
 
-	if (result.outcome == ShotStatus::Miss || !rules_.isContinue())
+	if (result.outcome == ShotStatus::Miss || !rules_.isShooterContinuesAfterHit)
 		currentPlayer_ = 1 - currentPlayer_;
 
 	return true;
@@ -187,7 +187,7 @@ bool Game::isFinished() const {
 }
 
 size_t Game::getTurnCount() const { return history_.size(); }
-
+// заглушка
 void Game::restore(std::vector<Move> history, int currentIndex) {
 	// Будет реализовано при создании файловой подсистемы
 }

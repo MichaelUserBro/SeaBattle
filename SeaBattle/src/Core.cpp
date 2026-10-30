@@ -20,14 +20,6 @@ Ship makeShip(Coordinate start, int length, Orientation orient) {
 	return Ship(coords);
 }
 
-// =================== Класс Rules ===================
-
-int Rules::getFieldSize() const { return fieldSize_; }
-bool Rules::getAllowTouching() const { return allowTouching_; }
-bool Rules::isContinue() const { return isShooterContinuesAfterHit_; }
-std::map<int, int> Rules::getFleet() const { return fleet_; }
-
-
 // =================== Класс Coordinate ===================
 
 Coordinate::Coordinate() : row(0), column(0) {};

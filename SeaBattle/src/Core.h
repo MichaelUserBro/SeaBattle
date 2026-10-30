@@ -10,17 +10,12 @@ enum class CellStatus {Empty, Ship, Miss, Hit, Killed}; // статус клетки
 enum class ShotStatus {Miss, Hit, Killed}; // статус выстрела
 const std::string ENG_ALF = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-class Rules {
-	private:
-		int fieldSize_ = 10;			   // размер поля
-		bool allowTouching_ = false;	   // разрешено ли касание
-		bool isShooterContinuesAfterHit_ = true;
-		std::map<int, int> fleet_ = { {4,1},{3,2},{2,3},{1,4} }; // map<длинна корабля, количество кораблей>
-	public:
-		int getFieldSize() const;
-		bool getAllowTouching() const;
-		bool isContinue() const;
-		std::map<int, int> getFleet() const; 
+struct Rules {
+		int fieldSize = 10;			   // размер поля
+		bool allowTouching = false;	   // разрешено ли касание
+		bool isShooterContinuesAfterHit = true; // продолжение стрельбы при попадании
+		std::map<int, int> fleet = { {4,1},{3,2},{2,3},{1,4} }; // map<длинна корабля, количество кораблей>
+
 };
 
 class Coordinate {
